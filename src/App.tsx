@@ -1,33 +1,46 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0);
+  function one1(): number {
+    console.log('One1 function is called');
+    return 1;
+  }
+
+  function one2(): number {
+    console.log('One2 function is called');
+    return 1;
+  }
+
+  const [test, setTest] = useState(1);
+  const [test1, setTest1] = useState(one1);
+  const [test2, setTest2] = useState(one2());
+  const [test3, setTest3] = useState((): number => {
+    console.log('One3 function is called');
+    return 1;
+  });
+  const [reset, setReset] = useState(1);
 
   return (
-    <div className="App">
+    <div className="m-[50px]">
+      <button
+        type="button"
+        className="border px-[10px] py-[5px]"
+        onClick={(): void => {
+          setReset((prev) => prev + 1);
+          setTest((prev) => prev + 1);
+          setTest1((prev) => prev + 1);
+          setTest2((prev) => prev + 1);
+          setTest3((prev) => prev + 1);
+        }}
+      >
+        reset
+      </button>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div>test : {test}</div>
+        <div>test1 : {test1}</div>
+        <div>test2 : {test2}</div>
+        <div>test3 : {test3}</div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
